@@ -15,7 +15,7 @@ export class CreateReservationComponent implements OnInit {
     contactName: '',
     contactType: '',
     phone: '',
-    birthDay: '',
+    birthDate: '',
     text: ''
   }
 

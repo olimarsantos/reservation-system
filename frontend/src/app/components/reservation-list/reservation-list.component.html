@@ -4,17 +4,10 @@
     [rowsPerPageOptions]="[10,20,30]"
     [totalRecords]="totalRecords" [loading]="loading">
     <ng-template pTemplate="header">
-        <tr>            
-            <th>Id</th>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Favorite</th>
-            <th>Edit</th>
-        </tr>
+        
     </ng-template>
     <ng-template pTemplate="body" let-reservation>
-        <tr>
-            <td>{{reservation.id}}</td>
+        <tr>            
             <td><img [src]="'assets/img/hotel.jpg'" [alt]="reservation.name" width="100" class="p-shadow-4" />
                 <div class="p-d-flex p-flex-column">
                     <div class="p-mb-2">{{reservation.name}}</div>
