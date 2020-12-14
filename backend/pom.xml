@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.reservation</groupId>
-	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>backend</name>
+	<artifactId>reservation-backend</artifactId>
+	<version>latest</version>
+	<name>reservation-backend</name>
 	<description>Application for reservation</description>
 
 	<properties>
@@ -118,7 +118,7 @@
 				</executions>
 				<configuration>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-					<repository>marvel-api-olimar</repository>
+					<repository>reservation-backend</repository>
 					<tag>${project.version}</tag>
 					<buildArgs>
 						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
