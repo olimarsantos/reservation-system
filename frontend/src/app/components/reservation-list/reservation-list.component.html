@@ -1,0 +1,24 @@
+<section>
+    <p-table [value]="reservations" [lazy]="true" (onLazyLoad)="loadCustomers($event)" 
+    [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,20,30]"
+    [totalRecords]="totalRecords" [loading]="loading">
+    <ng-template pTemplate="header">
+        
+    </ng-template>
+    <ng-template pTemplate="body" let-reservation>
+        <tr>            
+            <td><img [src]="'assets/img/hotel.jpg'" [alt]="reservation.name" width="100" class="p-shadow-4" />
+                <div class="p-d-flex p-flex-column">
+                    <div class="p-mb-2">{{reservation.name}}</div>
+                    <div class="p-mb-2">{{reservation.description}}</div>                        
+                </div>
+            </td>
+            <td><p-rating [ngModel]="reservation.rating" [cancel]="false"> </p-rating></td>
+            <td>Add Favorites<i class="pi pi-heart" style="font-size: 2rem"></i>            
+            </td>       
+            <td><p-button label="EDIT"></p-button></td>         
+        </tr>
+    </ng-template>
+    </p-table>    
+</section>
