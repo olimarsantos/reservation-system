@@ -9,7 +9,7 @@ import { map, catchError } from "rxjs/operators";
     providedIn: "root",
   })
   export class ReservationService {
-    baseUrl = "http://localhost:3001/reservations";
+    baseUrl = "http://localhost:3001/v1/public/reservations";
   
     constructor(private http: HttpClient){ }
 

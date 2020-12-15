@@ -58,12 +58,15 @@ section {
   padding: 140px;
 }
 
-.p-d-flex {
-  color: red;
-  align-items: unset;
+.p-d-flex .name{    
+  font-size: large;
 }
 
-section td .pi {
+.p-d-flex .description{    
+  font-size: medium;
+}
+
+section td .pi-heart {
   color: red;
   margin-left: 15px;
 }
