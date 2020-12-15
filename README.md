@@ -1,9 +1,9 @@
 # Reservation System
 
-Project developed with the objective of simulating a small reservation system.
+The Project developed with the objective of simulating a small reservation system.
 It contains a [backend](https://github.com/olimarsantos/reservation-system/tree/main/backend) developed in [Java](https://java.com) using the [Spring Boot](https://spring.io/projects/spring-boot) framework and [frontend](https://github.com/olimarsantos/reservation-system/tree/main/frontend) application developed in [Angular](https://angular.io/) and, this project uses the [commits pattern](https://www.conventionalcommits.org/en/v1.0.0/).
 
-## Technologies used
+## Technologies
 
 | # | For what |
 |:-:|:-|
