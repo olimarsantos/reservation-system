@@ -11,6 +11,11 @@ export interface Reservation {
     contactName: string
     contactType: string
     phone: string
-    birthDate: string
+    birthDate: Date
     text: string
+}
+
+export interface ContactType{
+    id: string
+    type: string
 }
