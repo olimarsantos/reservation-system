@@ -44,6 +44,14 @@ export class ReservationService {
     );
   }
 
+  update(reservationList: ReservationList): Observable<ReservationList> {
+    const url = `${this.baseUrl}/${reservationList.id}`;
+    return this.http.put<ReservationList>(url, reservationList).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
   showMessage(msg: string, isError: boolean = false): void {
     console.log('create');
   }

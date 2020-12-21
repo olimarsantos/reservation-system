@@ -1,7 +1,5 @@
-import {Component} from '@angular/core';
-import {ElementRef} from '@angular/core';
-import {LazyLoadEvent} from 'primeng/api';
-import {PrimeNGConfig} from 'primeng/api';
+import {Component, ElementRef} from '@angular/core';
+import {LazyLoadEvent, PrimeNGConfig} from 'primeng/api';
 
 import {ReservationList} from '../../modules/reservation.module';
 import {ReservationService} from '../../services/reservation.service';
@@ -53,6 +51,33 @@ export class ReservationListComponent {
         this.loading = false;
       }
     }, 400);
+
+    if (event?.sortField) {
+      this.sort(event?.sortField, event?.sortOrder);
+    }
+  }
+
+  sort(fieldName: string, order: number) {
+    this.datasource.sort((row1, row2) => {
+      const val1 = row1[fieldName];
+      const val2 = row2[fieldName];
+      if (val1 === val2) {
+        return 0;
+      }
+      let result = -1;
+      if (val1 > val2) {
+        result = 1;
+      }
+      if (order < 0) {
+        result = -result;
+      }
+      return result;
+    });
+  }
+
+  updateRatingValue(reservation: ReservationList, newValue) {
+    reservation.rating = newValue;
+    this.reservationService.update(reservation);
   }
 
   changeColor(el: ElementRef) {
