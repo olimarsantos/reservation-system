@@ -16,6 +16,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ReservationListComponent} from './components/reservation-list/reservation-list.component';
 import {CreateReservationComponent} from './components/create-reservation/create-reservation.component';
 import {AppRoutingModule} from './app-routing.module';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule,
     AutoCompleteModule
   ],
-  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent],
+  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent, ContactListComponent],
   bootstrap: [AppComponent],
   providers: [ReservationService],
 })

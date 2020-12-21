@@ -13,11 +13,11 @@ export class AppComponent {
     }
 
     get title(): string {
-        return this.headerService.headerData.title
-        }   
+      return this.headerService.headerData.title
+    }   
 
     get routeUrl(): string {
-    return this.headerService.headerData.routeUrl
+      return this.headerService.headerData.routeUrl
     }
 
 }

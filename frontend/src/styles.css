@@ -20,14 +20,20 @@ header {
 header div {
   background-color: white;
   height: 80px;
-  margin-top: 50px;
+  margin-top: 50px;  
 }
 
-header div .btcreate {
+header div .buttons {
+  display: flex;  
+  flex-wrap: nowrap;
   width: 215px;
-  height: 35px;
-  margin-left: 70%;
-  margin-top: -60px;
+  height: 60px;
+  margin-left: 63%;
+  margin-top: -60px; 
+}
+
+header div .btcontact{
+  margin-left: 5%;
 }
 
 .first {
@@ -41,14 +47,14 @@ header div .btcreate {
 }
 
 .third {
-  margin-left: 20%;
+  margin-left: 15%;
   font-size: 2rem;
   color: red;
   margin-top: 500px;
 }
 
 .fourth {
-  margin-left: 40%;
+  margin-left: 35%;
   margin-top: -25px;
   font-size: 1rem;
   height: 50px;

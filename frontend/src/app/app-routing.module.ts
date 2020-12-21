@@ -2,6 +2,7 @@ import { ReservationListComponent } from './components/reservation-list/reservat
 import { CreateReservationComponent } from './components/create-reservation/create-reservation.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: "reservation/create",
     component: CreateReservationComponent
+  },
+  {
+    path: "contact",
+    component: ContactListComponent
   },
 ];
 
