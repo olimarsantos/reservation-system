@@ -6,7 +6,7 @@ export interface ReservationList {
     favorite: boolean
 }
 
-export interface Reservation {
+export interface Contact {
     id?: number
     contactName: string
     contactType: string

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Reservation } from 'src/app/modules/reservation.module';
+import { Contact, ContactType } from 'src/app/modules/reservation.module';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -13,11 +14,25 @@ export class ContactListComponent implements OnInit {
 
   loading: boolean;
 
-  contacts: Reservation[];
+  contacts: Contact[];
 
-  constructor(private router: Router) { }
+  contactsType: ContactType[];
+
+  constructor(private router: Router,
+    private reservationService: ReservationService) { }
 
   ngOnInit(): void {
+    this.loading = true;
+
+    this.reservationService.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
+      this.loading = false;
+    });
+
+    this.reservationService.getContactType().subscribe(contactType => {
+      this.contactsType = contactType;
+      this.loading = false;
+    });    
   }
 
 }

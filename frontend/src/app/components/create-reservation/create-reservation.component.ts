@@ -2,7 +2,7 @@ import {ContactType} from './../../modules/reservation.module';
 import {ReservationService} from '../../services/reservation.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Reservation} from 'src/app/modules/reservation.module';
+import {Contact} from 'src/app/modules/reservation.module';
 import {HeaderService} from 'src/app/services/header.service';
 
 @Component({
@@ -14,13 +14,13 @@ export class CreateReservationComponent implements OnInit {
 
   selected: string;
 
-  selectedContact: Reservation;
+  selectedContact: Contact;
 
   filteredContacts: any[];
 
   birthDate: Date;
 
-  reservations: Reservation[];
+  reservations: Contact[];
 
   contactsType: ContactType[];
 
@@ -59,7 +59,7 @@ export class CreateReservationComponent implements OnInit {
     this.reservation.contactType = this.selectedContactType;
   }
 
-  reservation: Reservation = {
+  reservation: Contact = {
     contactName: '',
     contactType: '',
     phone: '',

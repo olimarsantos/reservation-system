@@ -1,32 +1,32 @@
 <section>
-  <p-table [value]="contacts" [lazy]="true"
+  <p-table [value]="contacts"
            [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
            [rowsPerPageOptions]="[10,20,30]"
            [totalRecords]="totalRecords" [loading]="loading"
   >
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="name">Contact name
-          <p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="contactName">Contact name
+          <p-sortIcon field="contactName"></p-sortIcon>
         </th>
-        <th pSortableColumn="number">Phone number
-          <p-sortIcon field="number"></p-sortIcon>
+        <th pSortableColumn="phone">Phone number
+          <p-sortIcon field="phone"></p-sortIcon>
         </th>
-        <th pSortableColumn="date">Birth date
-          <p-sortIcon field="date"></p-sortIcon>
+        <th pSortableColumn="birthDate">Birth date
+          <p-sortIcon field="birthDate"></p-sortIcon>
         </th>
-        <th pSortableColumn="type">Contact type
-          <p-sortIcon field="type"></p-sortIcon>
+        <th pSortableColumn="contactType">Contact type
+          <p-sortIcon field="contactType"></p-sortIcon>
         </th>
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-reservation>
+    <ng-template pTemplate="body" let-contact>
       <tr>
-        <td>Contact name</td>
-        <td>Phone number</td>
-        <td>Birth date</td>
-        <td>Contact type</td>
+        <td>{{contact.contactName}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.birthDate | date }}</td>
+        <td>{{contact.contactType}}</td>
         <td>
           <p-button label="EDIT"></p-button>
         </td>

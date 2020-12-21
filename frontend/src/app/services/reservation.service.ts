@@ -1,5 +1,5 @@
 import {ContactType} from './../modules/reservation.module';
-import {Reservation, ReservationList} from '../modules/reservation.module';
+import {Contact, ReservationList} from '../modules/reservation.module';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, EMPTY} from 'rxjs';
@@ -23,8 +23,8 @@ export class ReservationService {
     );
   }
 
-  getContacts(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.baseUrl}/contacts`).pipe(
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.baseUrl}/contacts`).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
@@ -37,8 +37,8 @@ export class ReservationService {
     );
   }
 
-  create(product: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.baseUrl}/reservations`, product).pipe(
+  create(product: Contact): Observable<Contact> {
+    return this.http.post<Contact>(`${this.baseUrl}/reservations`, product).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );

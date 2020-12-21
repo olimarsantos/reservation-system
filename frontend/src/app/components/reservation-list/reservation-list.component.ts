@@ -18,7 +18,7 @@ export class ReservationListComponent {
 
   totalRecords: number;
 
-  cols: any[];
+  // cols: any[];
 
   loading: boolean;
 
