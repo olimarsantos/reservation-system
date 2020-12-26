@@ -83,4 +83,8 @@ export class ReservationListComponent {
   changeColor(el: ElementRef) {
     el.nativeElement.style.color = '#e35e6b';
   }
+
+  editReservation() {
+    console.log('foi para a pagina de edição da reserva!');
+  }
 }

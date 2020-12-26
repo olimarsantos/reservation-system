@@ -20,6 +20,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {ContactListComponent} from './components/contact-list/contact-list.component';
 import {EditContactComponent} from './components/edit-contact/edit-contact.component';
 import {CreateContactComponent} from './components/create-contact/create-contact.component';
+import { EditReservationComponent } from './components/edit-reservation/edit-reservation.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import {CreateContactComponent} from './components/create-contact/create-contact
     AutoCompleteModule,
     ToolbarModule
   ],
-  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent, ContactListComponent, EditContactComponent, CreateContactComponent],
+  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent, ContactListComponent, EditContactComponent, CreateContactComponent, EditReservationComponent],
   bootstrap: [AppComponent],
   providers: [ReservationService],
 })
