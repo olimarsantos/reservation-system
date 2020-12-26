@@ -1,0 +1,42 @@
+<section>
+  <div class="p-grid p-fluid contact">
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="text" pInputText class="p-inputtext" placeholder="Contact Name" [(ngModel)]="contact.contactName">
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+        <p-autoComplete placeholder="Contact Type" [(ngModel)]="selectedContactType"
+                        (onSelect)="afterSeletedContactType()" [suggestions]="filteredContactsType"
+                        (completeMethod)="filterContactType()" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+        <input mask="99-999999" type="text" pInputText placeholder="Phone" [(ngModel)]="contact.phone"/>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <p-calendar inputId="basic" placeholder="Birth Date" [(ngModel)]="contact.birthDate"></p-calendar>
+      </div>
+    </div>
+    <div class="buttons">
+      <td>
+        <p-button label="SAVE" icon="pi pi-check" (onClick)="saveContact()"></p-button>
+      </td>
+      <td>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" routerLink="/contact"></button>
+      </td>
+    </div>
+  </div>
+</section>

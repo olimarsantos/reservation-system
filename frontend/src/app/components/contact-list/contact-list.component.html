@@ -1,4 +1,10 @@
 <section>
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="create"></button>        
+    </ng-template>    
+  </p-toolbar>
+
   <p-table [value]="contacts"
            [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
            [rowsPerPageOptions]="[10,20,30]"
@@ -27,8 +33,9 @@
         <td>{{contact.phone}}</td>
         <td>{{contact.birthDate | date }}</td>
         <td>{{contact.contactType}}</td>
-        <td>
-          <p-button label="EDIT"></p-button>
+        <td>          
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="edit/{{ contact.id }}"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteContact(contact.id)"></button>
         </td>
       </tr>
     </ng-template>

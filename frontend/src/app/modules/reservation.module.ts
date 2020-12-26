@@ -16,6 +16,6 @@ export interface Contact {
 }
 
 export interface ContactType{
-    id: string
+    id: number
     type: string
 }

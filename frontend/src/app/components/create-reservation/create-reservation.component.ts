@@ -28,6 +28,14 @@ export class CreateReservationComponent implements OnInit {
 
   selectedContactType: string;
 
+  reservation: Contact = {
+    contactName: '',
+    contactType: '',
+    phone: '',
+    birthDate: new Date(),
+    text: ''
+  };
+
   filterContact(event) {
     let filtered: any[] = [];
     let query = event.query;
@@ -59,14 +67,6 @@ export class CreateReservationComponent implements OnInit {
     this.reservation.contactType = this.selectedContactType;
   }
 
-  reservation: Contact = {
-    contactName: '',
-    contactType: '',
-    phone: '',
-    birthDate: new Date(),
-    text: ''
-  };
-
   constructor(
     private headerService: HeaderService,
     private reservationService: ReservationService,
@@ -88,7 +88,7 @@ export class CreateReservationComponent implements OnInit {
   }
 
   createReservation() {
-    this.reservationService.create(this.reservation).subscribe(() => {
+    this.reservationService.createContact(this.reservation).subscribe(() => {
       this.router.navigate(['']);
     });
   }

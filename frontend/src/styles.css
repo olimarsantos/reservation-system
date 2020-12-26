@@ -20,19 +20,19 @@ header {
 header div {
   background-color: white;
   height: 80px;
-  margin-top: 50px;  
+  margin-top: 50px;
 }
 
 header div .buttons {
-  display: flex;  
+  display: flex;
   flex-wrap: nowrap;
   width: 215px;
   height: 60px;
   margin-left: 63%;
-  margin-top: -60px; 
+  margin-top: -60px;
 }
 
-header div .btcontact{
+header div .btcontact {
   margin-left: 5%;
 }
 
@@ -64,14 +64,6 @@ section {
   padding: 140px;
 }
 
-.p-d-flex .name {
-  font-size: large;
-}
-
-.p-d-flex .description {
-  font-size: medium;
-}
-
 section td .pi-heart {
   color: #ff0000;
   margin-left: 15px;
@@ -82,6 +74,23 @@ section td .link {
   color: black;
   cursor: pointer;
 }
+
+section .contact {
+  background-color: white;
+}
+
+section .buttons {
+  margin-left: 77%;
+}
+
+.p-d-flex .name {
+  font-size: large;
+}
+
+.p-d-flex .description {
+  font-size: medium;
+}
+
 
 .btcreatereservation {
   margin-left: 91%;

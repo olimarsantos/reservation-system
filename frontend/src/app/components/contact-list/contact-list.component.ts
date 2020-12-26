@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Contact, ContactType } from 'src/app/modules/reservation.module';
-import { ReservationService } from 'src/app/services/reservation.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Contact, ContactType} from 'src/app/modules/reservation.module';
+import {ReservationService} from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -19,20 +19,30 @@ export class ContactListComponent implements OnInit {
   contactsType: ContactType[];
 
   constructor(private router: Router,
-    private reservationService: ReservationService) { }
+              private reservationService: ReservationService) {
+  }
 
   ngOnInit(): void {
     this.loading = true;
 
-    this.reservationService.getContacts().subscribe(contacts => {
-      this.contacts = contacts;
-      this.loading = false;
-    });
+    this.getContacts();
 
     this.reservationService.getContactType().subscribe(contactType => {
       this.contactsType = contactType;
       this.loading = false;
-    });    
+    });
   }
 
+  deleteContact(id: number) {
+    this.reservationService.deleteContact(id).subscribe(() => {
+      this.getContacts();
+    });
+  }
+
+  getContacts() {
+    this.reservationService.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
+      this.loading = false;
+    });
+  }
 }

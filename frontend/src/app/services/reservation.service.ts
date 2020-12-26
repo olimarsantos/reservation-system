@@ -2,15 +2,16 @@ import {ContactType} from './../modules/reservation.module';
 import {Contact, ReservationList} from '../modules/reservation.module';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, EMPTY} from 'rxjs';
-import {map, catchError} from 'rxjs/operators';
+import {EMPTY, Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
-  baseUrl = 'http://localhost:3001/v1/public';
+  // baseUrl = 'http://localhost:3001/v1/public';
+  baseUrl = 'http://localhost:3001'; //Test
 
   constructor(private http: HttpClient) {
   }
@@ -30,6 +31,22 @@ export class ReservationService {
     );
   }
 
+  getContactById(id: number): Observable<Contact> {
+    const url = `${this.baseUrl}/contacts/${id}`;
+    return this.http.get<Contact>(url).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  deleteContact(id: number): Observable<Contact> {
+    const url = `${this.baseUrl}/contacts/${id}`;
+    return this.http.delete<Contact>(url).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
   getContactType(): Observable<ContactType[]> {
     return this.http.get<ContactType[]>(`${this.baseUrl}/contact-type`).pipe(
       map((obj) => obj),
@@ -37,8 +54,22 @@ export class ReservationService {
     );
   }
 
-  create(product: Contact): Observable<Contact> {
-    return this.http.post<Contact>(`${this.baseUrl}/reservations`, product).pipe(
+  getContactTypeByName(contactType: string): Observable<ContactType> {
+    return this.http.get<ContactType>(`${this.baseUrl}/contact-type?type=${contactType}`).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  createContactType(product: ContactType): Observable<ContactType> {
+    return this.http.post<ContactType>(`${this.baseUrl}/contact-type`, product).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  createContact(product: Contact): Observable<Contact> {
+    return this.http.post<Contact>(`${this.baseUrl}/contacts`, product).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
