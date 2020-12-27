@@ -18,8 +18,6 @@ export class ReservationListComponent {
 
   totalRecords: number;
 
-  // cols: any[];
-
   loading: boolean;
 
   constructor(
@@ -33,7 +31,7 @@ export class ReservationListComponent {
   }
 
   ngOnInit() {
-    this.reservationService.read().subscribe(reservations => {
+    this.reservationService.getReservations().subscribe(reservations => {
       this.datasource = reservations;
       this.totalRecords = reservations.length;
     });
@@ -77,14 +75,11 @@ export class ReservationListComponent {
 
   updateRatingValue(reservation: ReservationList, newValue) {
     reservation.rating = newValue;
-    this.reservationService.update(reservation);
+    this.reservationService.updateReservation(reservation).subscribe(() => {
+    });
   }
 
   changeColor(el: ElementRef) {
     el.nativeElement.style.color = '#e35e6b';
-  }
-
-  editReservation() {
-    console.log('foi para a pagina de edição da reserva!');
   }
 }

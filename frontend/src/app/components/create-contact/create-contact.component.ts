@@ -25,12 +25,11 @@ export class CreateContactComponent implements OnInit {
     contactName: '',
     contactType: '',
     phone: '',
-    birthDate: new Date(),
-    text: ''
+    birthDate: new Date()
   };
 
   constructor(private reservationService: ReservationService,
-              private router: Router,) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -48,20 +47,19 @@ export class CreateContactComponent implements OnInit {
   }
 
   afterSeletedContactType() {
-    console.log('PASSOU AQUI!');
     this.contact.contactType = this.selectedContactType;
   }
 
   saveContact() {
     this.contact.contactType = this.selectedContactType;
     this.contactType.type = this.selectedContactType;
-    this.validadeData();
+    this.validateContact();
     this.reservationService.createContact(this.contact).subscribe(() => {
       this.router.navigate(['/contact']);
     });
   }
 
-  validadeData() {
+  validateContact() {
     this.reservationService.getContactTypeByName(this.contact.contactType).subscribe(contactType => {
       if (typeof contactType[0] === 'undefined') {
         this.reservationService.createContactType(this.contactType).subscribe(() => {

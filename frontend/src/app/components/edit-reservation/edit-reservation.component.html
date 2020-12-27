@@ -1,1 +1,53 @@
-<p>edit-reservation works!</p>
+<section>
+  <div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="text" pInputText class="p-inputtext" placeholder="Contact Name" [(ngModel)]="contact.contactName">
+      </div>
+    </div>
+
+<!--    <div class="p-col-12 p-md-3">-->
+<!--      <div class="p-inputgroup">-->
+<!--        <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>-->
+<!--        <p-autoComplete placeholder="Contact Type" [(ngModel)]="contact.contactType">-->
+<!--        </p-autoComplete>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+        <p-autoComplete placeholder="Contact Type" [(ngModel)]="selectedContactType"
+                        (onSelect)="afterSeletedContactType()" [suggestions]="filteredContactsType"
+                        (completeMethod)="filterContactType()" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+        <input mask="99-999999" type="text" pInputText placeholder="Phone" [(ngModel)]="contact.phone"/>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <p-calendar inputId="basic" placeholder="Birth Date" [(ngModel)]="birthDate"></p-calendar>
+      </div>
+    </div>
+  </div>
+  <p-editor [(ngModel)]="reservation.text" [style]="{'height':'320px'}"></p-editor>
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+    </div>
+
+    <div class="p-toolbar-group-right">
+      <p-button label="Save" icon="pi pi-check" (onClick)="saveReservation()" class="p-mr-2"></p-button>
+      <p-button label="Cancel" icon="pi pi-times" routerLink="" class="p-mr-2"></p-button>
+    </div>
+  </p-toolbar>
+
+</section>

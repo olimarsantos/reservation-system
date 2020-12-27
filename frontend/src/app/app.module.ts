@@ -14,13 +14,15 @@ import {RatingModule} from 'primeng/rating';
 import {EditorModule} from 'primeng/editor';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToolbarModule} from 'primeng/toolbar';
+import {SidebarModule} from 'primeng/sidebar';
+
 import {ReservationListComponent} from './components/reservation-list/reservation-list.component';
 import {CreateReservationComponent} from './components/create-reservation/create-reservation.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ContactListComponent} from './components/contact-list/contact-list.component';
 import {EditContactComponent} from './components/edit-contact/edit-contact.component';
 import {CreateContactComponent} from './components/create-contact/create-contact.component';
-import { EditReservationComponent } from './components/edit-reservation/edit-reservation.component';
+import {EditReservationComponent} from './components/edit-reservation/edit-reservation.component';
 
 @NgModule({
   imports: [
@@ -36,9 +38,12 @@ import { EditReservationComponent } from './components/edit-reservation/edit-res
     EditorModule,
     AppRoutingModule,
     AutoCompleteModule,
-    ToolbarModule
+    ToolbarModule,
+    SidebarModule,
   ],
-  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent, ContactListComponent, EditContactComponent, CreateContactComponent, EditReservationComponent],
+  declarations: [AppComponent, ReservationListComponent, CreateReservationComponent,
+    ContactListComponent, EditContactComponent, CreateContactComponent,
+    EditReservationComponent],
   bootstrap: [AppComponent],
   providers: [ReservationService],
 })

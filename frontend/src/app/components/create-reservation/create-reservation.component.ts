@@ -1,4 +1,4 @@
-import {ContactType} from './../../modules/reservation.module';
+import {ContactType, ReservationList} from './../../modules/reservation.module';
 import {ReservationService} from '../../services/reservation.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
@@ -12,13 +12,9 @@ import {HeaderService} from 'src/app/services/header.service';
 })
 export class CreateReservationComponent implements OnInit {
 
-  selected: string;
+  selectedContactName: string;
 
   selectedContact: Contact;
-
-  filteredContacts: any[];
-
-  birthDate: Date;
 
   reservations: Contact[];
 
@@ -26,13 +22,26 @@ export class CreateReservationComponent implements OnInit {
 
   filteredContactsType: any[];
 
+  filteredContacts: any[];
+
+  birthDate: Date;
+
   selectedContactType: string;
 
-  reservation: Contact = {
+  contact: Contact = {
+    id: 0,
     contactName: '',
     contactType: '',
     phone: '',
-    birthDate: new Date(),
+    birthDate: new Date()
+  };
+
+  reservation: ReservationList = {
+    rating: 5,
+    name: 'Padrão',
+    description: 'Descrição padrão',
+    favorite: false,
+    contactId: 0,
     text: ''
   };
 
@@ -58,13 +67,13 @@ export class CreateReservationComponent implements OnInit {
   }
 
   afterSeletedContact() {
-    this.reservation = this.selectedContact;
+    this.contact = this.selectedContact;
     this.birthDate = new Date(this.selectedContact.birthDate);
-    this.selectedContactType = this.reservation.contactType;
+    this.selectedContactType = this.contact.contactType;
   }
 
   afterSeletedContactType() {
-    this.reservation.contactType = this.selectedContactType;
+    this.contact.contactType = this.selectedContactType;
   }
 
   constructor(
@@ -88,8 +97,19 @@ export class CreateReservationComponent implements OnInit {
   }
 
   createReservation() {
-    this.reservationService.createContact(this.reservation).subscribe(() => {
-      this.router.navigate(['']);
-    });
+    if (this.contact.id === 0) {
+      this.contact.contactName = this.selectedContactName;
+      this.reservationService.createContact(this.contact).subscribe(contact => {
+        this.reservation.contactId = contact.id;
+        this.reservationService.createReservation(this.reservation).subscribe(() => {
+          this.router.navigate(['']);
+        });
+      });
+    } else {
+      this.reservation.contactId = this.contact.id;
+      this.reservationService.createReservation(this.reservation).subscribe(() => {
+        this.router.navigate(['']);
+      });
+    }
   }
 }

@@ -10,15 +10,39 @@ import {catchError, map} from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ReservationService {
-  // baseUrl = 'http://localhost:3001/v1/public';
-  baseUrl = 'http://localhost:3001'; //Test
+  baseUrl = 'http://localhost:3001/v1/public';
+
+  // baseUrl = 'http://localhost:3001'; //Test
 
   constructor(private http: HttpClient) {
   }
 
 
-  read(): Observable<ReservationList[]> {
+  getReservations(): Observable<ReservationList[]> {
     return this.http.get<ReservationList[]>(`${this.baseUrl}/reservations`).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  getReservationById(id: number): Observable<ReservationList> {
+    const url = `${this.baseUrl}/reservations/${id}`;
+    return this.http.get<ReservationList>(url).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  updateReservation(reservationList: ReservationList): Observable<ReservationList> {
+    const url = `${this.baseUrl}/reservations/${reservationList.id}`;
+    return this.http.put<ReservationList>(url, reservationList).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
+
+  createReservation(reservationList: ReservationList): Observable<ReservationList> {
+    return this.http.post<ReservationList>(`${this.baseUrl}/reservations`, reservationList).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
@@ -75,9 +99,9 @@ export class ReservationService {
     );
   }
 
-  update(reservationList: ReservationList): Observable<ReservationList> {
-    const url = `${this.baseUrl}/${reservationList.id}`;
-    return this.http.put<ReservationList>(url, reservationList).pipe(
+  updateContact(contact: Contact): Observable<Contact> {
+    const url = `${this.baseUrl}/contacts/${contact.id}`;
+    return this.http.put<ReservationList>(url, contact).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );

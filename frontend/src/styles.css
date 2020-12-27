@@ -83,6 +83,10 @@ section .buttons {
   margin-left: 77%;
 }
 
+section .p-toolbar-group-right{
+  margin-top: 2%;
+}
+
 .p-d-flex .name {
   font-size: large;
 }
@@ -91,7 +95,6 @@ section .buttons {
   font-size: medium;
 }
 
-
-.btcreatereservation {
-  margin-left: 91%;
+section .p-toolbar{
+  background-color: white;
 }

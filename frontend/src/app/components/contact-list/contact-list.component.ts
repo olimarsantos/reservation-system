@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Contact, ContactType} from 'src/app/modules/reservation.module';
 import {ReservationService} from 'src/app/services/reservation.service';
+import {HeaderService} from '../../services/header.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
-  styleUrls: ['./contact-list.component.css']
+  styleUrls: ['./contact-list.component.css'],
+  providers: [ConfirmationService],
 })
 export class ContactListComponent implements OnInit {
 
@@ -14,12 +17,21 @@ export class ContactListComponent implements OnInit {
 
   loading: boolean;
 
+  contactIdToDelete: number;
+
   contacts: Contact[];
 
   contactsType: ContactType[];
 
+  visibleSidebar;
+
   constructor(private router: Router,
+              private headerService: HeaderService,
               private reservationService: ReservationService) {
+    headerService.headerData = {
+      title: 'RESERVATION LIST',
+      routeUrl: ''
+    };
   }
 
   ngOnInit(): void {
@@ -33,10 +45,16 @@ export class ContactListComponent implements OnInit {
     });
   }
 
-  deleteContact(id: number) {
-    this.reservationService.deleteContact(id).subscribe(() => {
+  confirm(id: number) {
+    this.contactIdToDelete = id;
+    this.visibleSidebar = true;
+  }
+
+  deleteContact() {
+    this.reservationService.deleteContact(this.contactIdToDelete).subscribe(() => {
       this.getContacts();
     });
+    this.visibleSidebar = false;
   }
 
   getContacts() {
