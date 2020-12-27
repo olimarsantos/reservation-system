@@ -1,24 +1,39 @@
 <section>
-    <p-table [value]="reservations" [lazy]="true" (onLazyLoad)="loadCustomers($event)" 
-    [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10,20,30]"
-    [totalRecords]="totalRecords" [loading]="loading">
+  <p-table [value]="reservations" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
+           [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
+           [rowsPerPageOptions]="[10,20,30]"
+           [totalRecords]="totalRecords" [loading]="loading"
+  >
     <ng-template pTemplate="header">
-        
+      <tr>
+        <th pSortableColumn="name">Name
+          <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="rating">Rating
+          <p-sortIcon field="rating"></p-sortIcon>
+        </th>
+        <th>Favorite</th>
+        <th></th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-reservation>
-        <tr>            
-            <td><img [src]="'assets/img/hotel.jpg'" [alt]="reservation.name" width="100" class="p-shadow-4" />
-                <div class="p-d-flex p-flex-column">
-                    <div class="p-mb-2 name">{{reservation.name}}</div>
-                    <div class="p-mb-2 description">{{reservation.description}}</div>                        
-                </div>
-            </td>
-            <td><p-rating [ngModel]="reservation.rating" [cancel]="false"> </p-rating></td>
-            <td>Add Favorites<i class="pi pi-heart" style="font-size: 2rem"></i>            
-            </td>       
-            <td><p-button label="EDIT"></p-button></td>         
-        </tr>
+      <tr>
+        <td><img [src]="'assets/img/hotel.jpg'" [alt]="reservation.name" width="100" class="p-shadow-4"/>
+          <div class="p-d-flex p-flex-column">
+            <div class="p-mb-2 name">{{reservation.name}}</div>
+            <div class="p-mb-2 description">{{reservation.description}}</div>
+          </div>
+        </td>
+        <td>
+          <p-rating (onRate)="updateRatingValue(reservation, $event.value)" [ngModel]="reservation.rating"
+                    [cancel]="false"></p-rating>
+        </td>
+        <td>Add Favorites<i class="pi pi-heart" style="font-size: 2rem"></i>
+        </td>
+        <td>
+          <p-button routerLink="reservation/edit/{{ reservation.id }}" label="EDIT"></p-button>
+        </td>
+      </tr>
     </ng-template>
-    </p-table>    
+  </p-table>
 </section>

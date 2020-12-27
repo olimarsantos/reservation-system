@@ -1,0 +1,52 @@
+<section>
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+              routerLink="create"></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table [value]="contacts"
+           [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
+           [rowsPerPageOptions]="[10,20,30]"
+           [totalRecords]="totalRecords" [loading]="loading"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="contactName">Contact name
+          <p-sortIcon field="contactName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="phone">Phone number
+          <p-sortIcon field="phone"></p-sortIcon>
+        </th>
+        <th pSortableColumn="birthDate">Birth date
+          <p-sortIcon field="birthDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="contactType">Contact type
+          <p-sortIcon field="contactType"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-contact>
+      <tr>
+        <td>{{contact.contactName}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.birthDate | date }}</td>
+        <td>{{contact.contactType}}</td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                  routerLink="edit/{{ contact.id }}"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                  (click)="confirm(contact.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-sidebar [(visible)]="visibleSidebar" position="right" [baseZIndex]="10000">
+    <h3 style="font-weight:normal">Are you sure that you want to delete this contact?</h3>
+    <p-button type="button" (click)="deleteContact()" label="Confirm" styleClass="p-button-success"></p-button>
+    <p-button type="button" (click)="visibleSidebar = false" label="Cancel"
+              styleClass="p-button-secondary"></p-button>
+  </p-sidebar>
+</section>

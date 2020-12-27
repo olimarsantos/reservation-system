@@ -13,44 +13,50 @@ header {
   border-bottom: 1px solid #ccc;
   background: gray;
   z-index: 2;
-  width:100%;
-  height:180px;
+  width: 100%;
+  height: 180px;
 }
 
-header div{
+header div {
   background-color: white;
-  height:80px;
-  margin-top: 50px;  
+  height: 80px;
+  margin-top: 50px;
 }
 
-header div .btcreate{
+header div .buttons {
+  display: flex;
+  flex-wrap: nowrap;
   width: 215px;
-  height: 35px;
-  margin-left: 70%;
+  height: 60px;
+  margin-left: 63%;
   margin-top: -60px;
 }
 
-.first{
+header div .btcontact {
+  margin-left: 5%;
+}
+
+.first {
   margin-left: 25%;
   font-size: 4rem;
 }
 
-.second{
+.second {
   margin-left: 1%;
   font-size: 1.8rem;
 }
 
-.third{
-  margin-left: 20%;
+.third {
+  margin-left: 15%;
   font-size: 2rem;
   color: red;
   margin-top: 500px;
 }
 
-.fourth{
-  margin-left: 40%;
+.fourth {
+  margin-left: 35%;
   margin-top: -25px;
-  font-size: 1rem;  
+  font-size: 1rem;
   height: 50px;
 }
 
@@ -58,19 +64,37 @@ section {
   padding: 140px;
 }
 
-.p-d-flex .name{    
-  font-size: large;
-}
-
-.p-d-flex .description{    
-  font-size: medium;
-}
-
 section td .pi-heart {
-  color: red;
+  color: #ff0000;
   margin-left: 15px;
 }
 
-.btteste{
-  margin-left: 91%;
+section td .link {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+section .contact {
+  background-color: white;
+}
+
+section .buttons {
+  margin-left: 77%;
+}
+
+section .p-toolbar-group-right{
+  margin-top: 2%;
+}
+
+.p-d-flex .name {
+  font-size: large;
+}
+
+.p-d-flex .description {
+  font-size: medium;
+}
+
+section .p-toolbar{
+  background-color: white;
 }
