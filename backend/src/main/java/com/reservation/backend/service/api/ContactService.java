@@ -10,7 +10,7 @@ public interface ContactService {
 
     Contact findById(Integer id);
 
-    Contact findByName(String name);
-
     Contact save(Contact contact);
+
+    void deleteById(Integer id);
 }

@@ -30,7 +30,19 @@ public class Reservation implements Serializable {
     @Column
     private Boolean favorite;
 
+    @Column(columnDefinition="text")
+    private String text;
+
     @OneToOne
     @NonNull
     private Contact contact;
+
+    public Reservation(String name, String description, String text, Boolean favorite, Integer rating, Contact contact) {
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.favorite = favorite;
+        this.text = text;
+        this.contact = contact;
+    }
 }

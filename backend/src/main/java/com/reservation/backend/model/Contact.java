@@ -2,6 +2,7 @@ package com.reservation.backend.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -17,18 +18,13 @@ public class Contact {
     private Integer id;
 
     @Column
-    private String name;
+    private String contactName;
 
-    @Column
-    private String type;
-
-
-
-    public Contact(String name, String type, String phone, String birthDate) {
-        this.name = name;
-        this.type = type;
+    public Contact(String contactName, String phone, String birthDate, ContactType contactType) {
+        this.contactName = contactName;
         this.phone = phone;
         this.birthDate = birthDate;
+        this.contactType = contactType;
     }
 
     @Column
@@ -36,4 +32,8 @@ public class Contact {
 
     @Column
     private String birthDate;
+
+    @OneToOne
+    @NonNull
+    private ContactType contactType;
 }
