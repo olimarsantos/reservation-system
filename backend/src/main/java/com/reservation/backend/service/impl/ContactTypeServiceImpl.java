@@ -30,4 +30,9 @@ public class ContactTypeServiceImpl implements ContactTypeService {
         contactType = repository.findByType(type).stream().findFirst();
         return contactType.orElse(null);
     }
+
+    @Override
+    public ContactType save(ContactType contactType) {
+        return repository.save(contactType);
+    }
 }
