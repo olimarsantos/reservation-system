@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { HeaderData } from '../modules/header-data.module';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {HeaderData} from '../modules/header-data.module';
 
 
 @Injectable({
@@ -9,17 +9,18 @@ import { HeaderData } from '../modules/header-data.module';
 export class HeaderService {
 
   private _headerData = new BehaviorSubject<HeaderData>({
-    title: 'CREATE RESERVATION',    
+    title: 'CREATE RESERVATION',
     routeUrl: ''
-  })
+  });
 
-  constructor() { }
+  constructor() {
+  }
 
   get headerData(): HeaderData {
-    return this._headerData.value
+    return this._headerData.value;
   }
 
   set headerData(headerData: HeaderData) {
-    this._headerData.next(headerData)
+    this._headerData.next(headerData);
   }
 }

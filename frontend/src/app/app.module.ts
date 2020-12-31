@@ -15,6 +15,9 @@ import {EditorModule} from 'primeng/editor';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToolbarModule} from 'primeng/toolbar';
 import {SidebarModule} from 'primeng/sidebar';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import {ReservationListComponent} from './components/reservation-list/reservation-list.component';
 import {CreateReservationComponent} from './components/create-reservation/create-reservation.component';
@@ -40,12 +43,14 @@ import {EditReservationComponent} from './components/edit-reservation/edit-reser
     AutoCompleteModule,
     ToolbarModule,
     SidebarModule,
+    ToastModule,
+    ConfirmDialogModule,
   ],
   declarations: [AppComponent, ReservationListComponent, CreateReservationComponent,
     ContactListComponent, EditContactComponent, CreateContactComponent,
     EditReservationComponent],
   bootstrap: [AppComponent],
-  providers: [ReservationService],
+  providers: [ReservationService, MessageService, ConfirmationService],
 })
 
 export class AppModule {

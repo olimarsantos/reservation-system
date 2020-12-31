@@ -3,7 +3,7 @@
     <div class="p-col-12 p-md-3">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-        <p-autoComplete placeholder="Contact Name" (onSelect)="afterSeletedContact()" [(ngModel)]="selectedContactName"
+        <p-autoComplete placeholder="Contact Name" (onSelect)="afterSelectedContact()" [(ngModel)]="selectedContactName"
                         [suggestions]="filteredContacts" (completeMethod)="filterContact($event)"></p-autoComplete>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
         <p-autoComplete placeholder="Contact Type" [(ngModel)]="selectedContactType"
-                        (onSelect)="afterSeletedContactType()" [suggestions]="filteredContactsType"
+                        (onSelect)="afterSelectedContactType()" [suggestions]="filteredContactsType"
                         (completeMethod)="filterContactType()" [dropdown]="true"></p-autoComplete>
       </div>
     </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="p-toolbar-group-right">
-      <p-button (click)="createReservation()">SEND</p-button>
+      <p-button (click)="saveReservation()">SEND</p-button>
     </div>
   </p-toolbar>
 </section>

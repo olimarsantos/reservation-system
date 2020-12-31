@@ -4,7 +4,8 @@
       <div class="p-col-12 p-md-3">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input type="text" pInputText class="p-inputtext" placeholder="Contact Name" [(ngModel)]="contact.contactName">
+          <input type="text" pInputText class="p-inputtext" placeholder="Contact Name"
+                 [(ngModel)]="contact.contactName">
         </div>
       </div>
 
@@ -12,7 +13,7 @@
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
           <p-autoComplete placeholder="Contact Type" [(ngModel)]="selectedContactType"
-                          (onSelect)="afterSeletedContactType()" [suggestions]="filteredContactsType"
+                          (onSelect)="afterSelectedContactType()" [suggestions]="filteredContactsType"
                           (completeMethod)="filterContactType()" [dropdown]="true">
           </p-autoComplete>
         </div>

@@ -2,6 +2,7 @@ import {Contact, ContactType} from './../../modules/reservation.module';
 import {Component, OnInit} from '@angular/core';
 import {ReservationService} from 'src/app/services/reservation.service';
 import {Router} from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-create-contact',
@@ -29,6 +30,7 @@ export class CreateContactComponent implements OnInit {
   };
 
   constructor(private reservationService: ReservationService,
+              private messageService: MessageService,
               private router: Router) {
   }
 
@@ -39,30 +41,34 @@ export class CreateContactComponent implements OnInit {
   }
 
   filterContactType() {
-    let filtered: any[] = [];
+    const filtered: any[] = [];
     for (let i = 0; i < this.contactsType.length; i++) {
       filtered.push(this.contactsType[i].type);
     }
     this.filteredContactsType = filtered;
   }
 
-  afterSeletedContactType() {
+  afterSelectedContactType() {
     this.contact.contactType = this.selectedContactType;
   }
 
   saveContact() {
     this.contact.contactType = this.selectedContactType;
     this.contactType.type = this.selectedContactType;
-    this.validateContact();
-    this.reservationService.createContact(this.contact).subscribe(() => {
-      this.router.navigate(['/contact']);
-    });
+    this.createContact();
   }
 
-  validateContact() {
+  createContact() {
     this.reservationService.getContactTypeByName(this.contact.contactType).subscribe(contactType => {
-      if (typeof contactType[0] === 'undefined') {
+      if (contactType === null) {
         this.reservationService.createContactType(this.contactType).subscribe(() => {
+          this.reservationService.createContact(this.contact).subscribe(() => {
+            this.router.navigate(['/contact']);
+          });
+        });
+      } else {
+        this.reservationService.createContact(this.contact).subscribe(() => {
+          this.router.navigate(['/contact']);
         });
       }
     });

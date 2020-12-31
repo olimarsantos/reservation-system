@@ -64,10 +64,19 @@ section {
   padding: 140px;
 }
 
-section td .pi-heart {
+section .favorite .pi-heart{
   color: #ff0000;
   margin-left: 15px;
 }
+
+section .favorited .pi-heart{
+  margin-left: 15px;
+}
+
+section .favorited{
+  color: gray;
+}
+
 
 section td .link {
   text-decoration: none;
