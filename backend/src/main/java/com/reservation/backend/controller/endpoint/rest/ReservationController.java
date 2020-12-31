@@ -100,13 +100,16 @@ public class ReservationController {
     @CrossOrigin(origins = CORS_URL)
     @DeleteMapping("/contacts/{contactId}")
     public ResponseEntity<Contact> deleteContact(@PathVariable Integer contactId) {
-        Contact contact = contactService.findById(contactId);
-
-        if (contact != null) {
-            contactService.deleteById(contactId);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        try {
+            Contact contact = contactService.findById(contactId);
+            if (contact != null) {
+                contactService.deleteById(contactId);
+                return new ResponseEntity<>(contact, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Contact(), HttpStatus.OK);
         }
     }
 
@@ -116,6 +119,14 @@ public class ReservationController {
     @GetMapping("/contact-type")
     public ResponseEntity<List<ContactType>> getContactTypes() {
         return new ResponseEntity<>(contactTypeService.findAll(), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Create a contact types.",
+            notes = "Create a contact types.")
+    @CrossOrigin(origins = CORS_URL)
+    @PostMapping("/contact-type")
+    public ResponseEntity<ContactType> createContactType(@RequestBody ContactType request) {
+        return new ResponseEntity<>(contactTypeService.save(request), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Fetches a single contact types by type.",
@@ -170,6 +181,7 @@ public class ReservationController {
             reservation.setRating(request.getRating());
             reservation.setName(request.getName());
             reservation.setDescription(request.getDescription());
+            reservation.setFavorite(request.getFavorite());
             reservation.setText(request.getText());
             reservation.setContact(contact);
             return new ResponseEntity<>(ReservationDto.toReservationDto(reservationService.save(reservation)), HttpStatus.OK);

@@ -9,4 +9,6 @@ public interface ContactTypeService {
     List<ContactType> findAll();
 
     ContactType findByType(String type);
+
+    ContactType save(ContactType contactType);
 }

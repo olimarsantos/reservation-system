@@ -1,7 +1,13 @@
-INSERT INTO CONTACT_TYPE (id, type) VALUES (876, 'Contact Type 1');
-INSERT INTO CONTACT_TYPE (id, type) VALUES (875, 'Contact Type 2');
-INSERT INTO CONTACT_TYPE (id, type) VALUES (874, 'Contact Type 3');
-INSERT INTO CONTACT_TYPE (id, type) VALUES (873, 'Contact Type 4');
+CREATE OR REPLACE PROCEDURE insert_data(id integer, "type" varchar(255))
+LANGUAGE SQL
+AS $$
+INSERT INTO contact_type VALUES (id, "type")
+$$;
+
+CALL insert_data(876, 'Contact Type 1');
+CALL insert_data(875, 'Contact Type 2');
+CALL insert_data(874, 'Contact Type 3');
+CALL insert_data(873, 'Contact Type 4');
 
 INSERT INTO CONTACT (id, birth_date, contact_name, phone, contact_type_id) VALUES (986, '2020-12-01T03:00:00.000Z', 'Ana', '+55048994649702', 876);
 INSERT INTO CONTACT (id, birth_date, contact_name, phone, contact_type_id) VALUES (675, '2020-12-01T03:00:00.000Z', 'Robert', '+55048994649702', 876);
