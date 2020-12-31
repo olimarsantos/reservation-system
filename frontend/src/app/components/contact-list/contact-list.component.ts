@@ -3,14 +3,15 @@ import {Router} from '@angular/router';
 import {Contact, ContactType} from 'src/app/modules/reservation.module';
 import {ReservationService} from 'src/app/services/reservation.service';
 import {HeaderService} from '../../services/header.service';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css'],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
 })
+
 export class ContactListComponent implements OnInit {
 
   totalRecords: number;
@@ -23,11 +24,11 @@ export class ContactListComponent implements OnInit {
 
   contactsType: ContactType[];
 
-  visibleSidebar;
-
   constructor(private router: Router,
               private headerService: HeaderService,
-              private reservationService: ReservationService) {
+              private reservationService: ReservationService,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService) {
     headerService.headerData = {
       title: 'RESERVATION LIST',
       routeUrl: ''
@@ -47,14 +48,28 @@ export class ContactListComponent implements OnInit {
 
   confirm(id: number) {
     this.contactIdToDelete = id;
-    this.visibleSidebar = true;
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this contact?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.deleteContact();
+      },
+      reject: () => {
+        this.messageService.add({severity: 'info', summary: 'Rejected', detail: 'You have rejected'});
+      }
+    });
   }
 
   deleteContact() {
-    this.reservationService.deleteContact(this.contactIdToDelete).subscribe(() => {
-      this.getContacts();
+    this.reservationService.deleteContact(this.contactIdToDelete).subscribe(contact => {
+      if (contact.id != null) {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully deleted'});
+        this.getContacts();
+      } else {
+        this.showWarn();
+      }
     });
-    this.visibleSidebar = false;
   }
 
   getContacts() {
@@ -63,4 +78,12 @@ export class ContactListComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  showWarn() {
+    this.messageService.add({
+      severity: 'warn', summary: 'Warn',
+      detail: 'Operation aborted! This contact is linked to a reservation'
+    });
+  }
+
 }

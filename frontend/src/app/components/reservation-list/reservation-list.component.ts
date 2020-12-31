@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {LazyLoadEvent, PrimeNGConfig} from 'primeng/api';
 
 import {ReservationList} from '../../modules/reservation.module';
@@ -75,11 +75,16 @@ export class ReservationListComponent {
 
   updateRatingValue(reservation: ReservationList, newValue) {
     reservation.rating = newValue;
-    this.reservationService.updateReservation(reservation).subscribe(() => {
-    });
+    this.updateReservation(reservation);
   }
 
-  changeColor(el: ElementRef) {
-    el.nativeElement.style.color = '#e35e6b';
+  updateFavoriteValue(reservation: ReservationList, newValue) {
+    reservation.favorite = newValue;
+    this.updateReservation(reservation);
+  }
+
+  updateReservation(reservation: ReservationList) {
+    this.reservationService.updateReservation(reservation).subscribe(() => {
+    });
   }
 }

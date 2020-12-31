@@ -51,14 +51,14 @@ export class EditContactComponent implements OnInit {
   }
 
   filterContactType() {
-    let filtered: any[] = [];
+    const filtered: any[] = [];
     for (let i = 0; i < this.contactsType.length; i++) {
       filtered.push(this.contactsType[i].type);
     }
     this.filteredContactsType = filtered;
   }
 
-  afterSeletedContactType() {
+  afterSelectedContactType() {
     this.contact.contactType = this.selectedContactType;
   }
 
@@ -67,15 +67,20 @@ export class EditContactComponent implements OnInit {
     this.contact.contactType = this.selectedContactType;
     this.contactType.type = this.selectedContactType;
     this.validateContactType();
-    this.reservationService.updateContact(this.contact).subscribe(() => {
-      this.router.navigate(['/contact']);
-    });
   }
 
-  private validateContactType() {
+  validateContactType() {
     this.reservationService.getContactTypeByName(this.contact.contactType).subscribe(contactType => {
-      if (typeof contactType[0] === 'undefined') {
-        this.reservationService.createContactType(this.contactType).subscribe(() => {
+      if (contactType === null) {
+        this.reservationService.createContactType(this.contactType).subscribe(newContactType => {
+          this.contact.contactType = newContactType.type;
+          this.reservationService.updateContact(this.contact).subscribe(() => {
+            this.router.navigate(['/contact']);
+          });
+        });
+      } else {
+        this.reservationService.updateContact(this.contact).subscribe(() => {
+          this.router.navigate(['/contact']);
         });
       }
     });

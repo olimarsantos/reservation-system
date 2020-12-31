@@ -12,8 +12,6 @@ import {catchError, map} from 'rxjs/operators';
 export class ReservationService {
   baseUrl = 'http://localhost:3001/v1/public';
 
-  // baseUrl = 'http://localhost:3001'; //Test
-
   constructor(private http: HttpClient) {
   }
 
@@ -79,7 +77,7 @@ export class ReservationService {
   }
 
   getContactTypeByName(contactType: string): Observable<ContactType> {
-    return this.http.get<ContactType>(`${this.baseUrl}/contact-type?type=${contactType}`).pipe(
+    return this.http.get<ContactType>(`${this.baseUrl}/contact-type/${contactType}`).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
@@ -105,10 +103,6 @@ export class ReservationService {
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
-  }
-
-  showMessage(msg: string, isError: boolean = false): void {
-    console.log('create');
   }
 
   errorHandler(e: any): Observable<any> {

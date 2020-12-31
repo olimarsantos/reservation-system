@@ -1,4 +1,4 @@
-import {ContactType, ReservationList} from './../../modules/reservation.module';
+import {ContactType, listOfDescription, listOfName, listOfNum, ReservationList} from './../../modules/reservation.module';
 import {ReservationService} from '../../services/reservation.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
@@ -10,6 +10,7 @@ import {HeaderService} from 'src/app/services/header.service';
   templateUrl: './create-reservation.component.html',
   styleUrls: ['./create-reservation.component.css']
 })
+
 export class CreateReservationComponent implements OnInit {
 
   selectedContactName: string;
@@ -36,21 +37,26 @@ export class CreateReservationComponent implements OnInit {
     birthDate: new Date()
   };
 
+  contactType: ContactType = {
+    id: 0,
+    type: ''
+  };
+
   reservation: ReservationList = {
     rating: 5,
-    name: 'Padrão',
-    description: 'Descrição padrão',
+    name: listOfName[listOfNum[this.randomInteger(0, 5)]],
+    description: listOfDescription[listOfNum[this.randomInteger(0, 5)]],
     favorite: false,
     contactId: 0,
     text: ''
   };
 
   filterContact(event) {
-    let filtered: any[] = [];
-    let query = event.query;
+    const filtered: any[] = [];
+    const query = event.query;
     for (let i = 0; i < this.reservations.length; i++) {
-      let country = this.reservations[i];
-      if (country.contactName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      const country = this.reservations[i];
+      if (country.contactName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
         this.selectedContact = this.reservations[i];
         filtered.push(country.contactName);
       }
@@ -59,20 +65,20 @@ export class CreateReservationComponent implements OnInit {
   }
 
   filterContactType() {
-    let filtered: any[] = [];
+    const filtered: any[] = [];
     for (let i = 0; i < this.contactsType.length; i++) {
       filtered.push(this.contactsType[i].type);
     }
     this.filteredContactsType = filtered;
   }
 
-  afterSeletedContact() {
+  afterSelectedContact() {
     this.contact = this.selectedContact;
     this.birthDate = new Date(this.selectedContact.birthDate);
     this.selectedContactType = this.contact.contactType;
   }
 
-  afterSeletedContactType() {
+  afterSelectedContactType() {
     this.contact.contactType = this.selectedContactType;
   }
 
@@ -96,20 +102,43 @@ export class CreateReservationComponent implements OnInit {
     });
   }
 
-  createReservation() {
+  saveReservation() {
     if (this.contact.id === 0) {
-      this.contact.contactName = this.selectedContactName;
-      this.reservationService.createContact(this.contact).subscribe(contact => {
-        this.reservation.contactId = contact.id;
-        this.reservationService.createReservation(this.reservation).subscribe(() => {
-          this.router.navigate(['']);
-        });
-      });
+      this.createContact();
     } else {
-      this.reservation.contactId = this.contact.id;
-      this.reservationService.createReservation(this.reservation).subscribe(() => {
-        this.router.navigate(['']);
-      });
+      this.createReservation();
     }
+  }
+
+  createContact() {
+    this.contact.contactName = this.selectedContactName;
+    this.contact.contactType = this.selectedContactType;
+    this.reservationService.getContactTypeByName(this.contact.contactType).subscribe(contactType => {
+      if (contactType === null) {
+        this.contactType.type = this.contact.contactType;
+        this.reservationService.createContactType(this.contactType).subscribe(() => {
+          this.reservationService.createContact(this.contact).subscribe(contact => {
+            this.contact.id = contact.id;
+            this.createReservation();
+          });
+        });
+      } else {
+        this.reservationService.createContact(this.contact).subscribe(contact => {
+          this.contact.id = contact.id;
+          this.createReservation();
+        });
+      }
+    });
+  }
+
+  createReservation() {
+    this.reservation.contactId = this.contact.id;
+    this.reservationService.createReservation(this.reservation).subscribe(() => {
+      this.router.navigate(['']);
+    });
+  }
+
+  randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

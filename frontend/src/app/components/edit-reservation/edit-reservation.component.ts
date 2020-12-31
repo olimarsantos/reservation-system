@@ -81,15 +81,17 @@ export class EditReservationComponent implements OnInit {
 
   private validateContactType() {
     this.reservationService.getContactTypeByName(this.contact.contactType).subscribe(contactType => {
-      if (typeof contactType[0] === 'undefined') {
-        this.reservationService.createContactType(this.contactType).subscribe(() => {
+      if (contactType === null) {
+        this.reservationService.createContactType(this.contactType).subscribe(newContactType => {
+          this.contact.contactType = newContactType.type;
+
         });
       }
     });
   }
 
   filterContactType() {
-    let filtered: any[] = [];
+    const filtered: any[] = [];
     for (let i = 0; i < this.contactsType.length; i++) {
       filtered.push(this.contactsType[i].type);
     }

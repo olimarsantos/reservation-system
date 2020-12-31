@@ -1,4 +1,4 @@
 export interface HeaderData {
-    title: string    
-    routeUrl: string
+  title: string;
+  routeUrl: string;
 }
